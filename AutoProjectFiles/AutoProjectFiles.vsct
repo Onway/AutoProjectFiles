@@ -74,7 +74,7 @@
         <Parent guid="guidAutoProjectFilesCmdSet" id="MyMenuGroup" />
         <Icon guid="guidImages" id="bmpPic2" />
         <Strings>
-          <ButtonText>Create Snapshot</ButtonText>
+          <ButtonText>Create Snapshot...</ButtonText>
         </Strings>
       </Button>
 
