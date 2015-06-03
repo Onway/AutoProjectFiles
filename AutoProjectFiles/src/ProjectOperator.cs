@@ -17,38 +17,57 @@ namespace Onway.AutoProjectFiles
         {
             try
             {
-                string msg = FileOperateService.Instance.IsOperable(proj.FullName);
-                if (msg != null)
-                {
-                    VsUtil.MessageBox(VsUtil.PackageTitle, msg,
-                        Microsoft.VisualStudio.Shell.Interop.OLEMSGBUTTON.OLEMSGBUTTON_OK,
-                        Microsoft.VisualStudio.Shell.Interop.OLEMSGICON.OLEMSGICON_WARNING);
-                    return;
-                }
+                LogService.Instance.Open();
+                LogService.Instance.LogMsg(">> Auto Project Files...");
 
-                List<string> newFiles = null;
-                List<string> delFiles = null;
-                FileOperateService.Instance.GetOperableFiles(proj.FullName, out newFiles, out delFiles);
-
-                List<string> addSuccList = new List<string>();
-                List<string> delSuccList = new List<string>();
-                try
+                if (IsOperableProject())
                 {
-                    ExcludeFiles(delFiles, ref delSuccList);
-                    IncludeFiles(newFiles, ref addSuccList);
+                    OperateProjectFiles();
                 }
-                finally
-                {
-                    FileOperateService.Instance.SaveOperableFiles(proj.FullName, addSuccList, delSuccList);
-                }
-                
-                VsUtil.MessageBox(VsUtil.PackageTitle, "Finished");
             }
             catch (Exception ex)
             {
-                VsUtil.MessageBox(VsUtil.PackageTitle, ex.Message + Environment.NewLine + ex.StackTrace,
-                    Microsoft.VisualStudio.Shell.Interop.OLEMSGBUTTON.OLEMSGBUTTON_OK,
-                    Microsoft.VisualStudio.Shell.Interop.OLEMSGICON.OLEMSGICON_CRITICAL);
+                LogService.Instance.LogMsg("Error>> " + ex.Message + Environment.NewLine + ex.StackTrace);
+            }
+            finally
+            {
+                LogService.Instance.Close();
+            }
+        }
+
+        private bool IsOperableProject()
+        {
+            string msg = FileOperateService.Instance.IsOperable(proj.FullName);
+            if (msg != null)
+            {
+                LogService.Instance.LogMsg("Error>> " + msg);
+            }
+            return msg == null;
+        }
+
+        private void OperateProjectFiles()
+        {
+            List<string> newFiles = null;
+            List<string> delFiles = null;
+            FileOperateService.Instance.GetOperableFiles(proj.FullName, out newFiles, out delFiles);
+
+            List<string> addSuccList = new List<string>();
+            List<string> delSuccList = new List<string>();
+            try
+            {
+                LogService.Instance.LogMsg(">> Exclude {0} entries from project...", delFiles.Count);
+                ExcludeFiles(delFiles, ref delSuccList);
+                LogService.Instance.LogMsgs(delSuccList);
+                LogService.Instance.LogMsg(">> {0} entries done!", delSuccList.Count);
+
+                LogService.Instance.LogMsg(">> Include {0} entries to project...", newFiles.Count);
+                IncludeFiles(newFiles, ref addSuccList);
+                LogService.Instance.LogMsgs(addSuccList);
+                LogService.Instance.LogMsg(">> {0} entries done!", addSuccList.Count);
+            }
+            finally
+            {
+                FileOperateService.Instance.SaveOperableFiles(proj.FullName, addSuccList, delSuccList);
             }
         }
 

@@ -12,6 +12,7 @@ using System.Runtime.InteropServices.ComTypes;
 
 using EnvDTE;
 using EnvDTE80;
+using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 
 namespace Onway.AutoProjectFiles
@@ -138,6 +139,23 @@ namespace Onway.AutoProjectFiles
                 }
             }
             return null;
+        }
+
+        public static IVsOutputWindowPane GetVsOutputWindowPane()
+        {
+            IVsOutputWindow outputWindow =
+                Package.GetGlobalService(typeof(SVsOutputWindow)) as IVsOutputWindow;
+            Guid guidGeneral = Microsoft.VisualStudio.VSConstants.OutputWindowPaneGuid.GeneralPane_guid;
+
+            IVsOutputWindowPane pane;
+            outputWindow.CreatePane(guidGeneral, "General", 1, 0);
+            outputWindow.GetPane(guidGeneral, out pane);
+
+            EnvDTE80.DTE2 dte2 = Package.GetGlobalService(typeof(EnvDTE.DTE)) as EnvDTE80.DTE2;
+            dte2.ToolWindows.OutputWindow.Parent.Activate();
+
+            pane.Activate();
+            return pane;
         }
 
         [DllImport("ole32.dll")]
