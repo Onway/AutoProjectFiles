@@ -54,6 +54,9 @@ namespace Onway.AutoProjectFiles
 
         private void ExcludeFiles(List<string> delFiles, ref List<string> succList)
         {
+            delFiles.Sort();
+            delFiles.Reverse();
+
             string dirName = Path.GetDirectoryName(proj.FullName);
             foreach (string f in delFiles)
             {
@@ -64,7 +67,7 @@ namespace Onway.AutoProjectFiles
                 }
 
                 string[] pathParts = f.Split(Path.DirectorySeparatorChar);
-                ProjectItem pItem = SearchProjectItem(proj.ProjectItems, pathParts, 0);
+                ProjectItem pItem = SearchProjectItem(proj.ProjectItems, pathParts, 0, pathParts.Length - 1);
                 if (pItem != null)
                 {
                     pItem.Delete();
@@ -75,13 +78,21 @@ namespace Onway.AutoProjectFiles
 
         private void IncludeFiles(List<string> newFiles, ref List<string> succList)
         {
+            newFiles.Sort();
             string dirName = Path.GetDirectoryName(proj.FullName);
             foreach (string f in newFiles)
             {
                 string fPath = Path.Combine(dirName, f);
                 if (Directory.Exists(fPath))
                 {
-                    proj.ProjectItems.AddFromDirectory(fPath);
+                    string[] pathParts = f.Split(Path.DirectorySeparatorChar);
+                    ProjectItem parentItem = SearchProjectItem(proj.ProjectItems, pathParts, 0, pathParts.Length - 2);
+                    if (parentItem == null)
+                    {
+                        continue;
+                    }
+
+                    parentItem.ProjectItems.AddFromDirectory(fPath);
                     succList.Add(f);
                 }
                 else if (File.Exists(fPath))
@@ -92,7 +103,7 @@ namespace Onway.AutoProjectFiles
             }
         }
 
-        private ProjectItem SearchProjectItem(ProjectItems projectItems, string[] pathParts, int curIndex)
+        private ProjectItem SearchProjectItem(ProjectItems projectItems, string[] pathParts, int curIndex, int endIndex)
         {
             foreach (ProjectItem pItem in projectItems)
             {
@@ -101,12 +112,12 @@ namespace Onway.AutoProjectFiles
                     continue;
                 }
 
-                if (curIndex == pathParts.Length - 1)
+                if (curIndex == endIndex)
                 {
                     return pItem;
                 }
 
-                return SearchProjectItem(pItem.ProjectItems, pathParts, curIndex + 1);
+                return SearchProjectItem(pItem.ProjectItems, pathParts, curIndex + 1, endIndex);
             }
             return null;
         }
