@@ -49,7 +49,8 @@
             // 
             this.txtProjectFile.Location = new System.Drawing.Point(12, 24);
             this.txtProjectFile.Name = "txtProjectFile";
-            this.txtProjectFile.Size = new System.Drawing.Size(352, 21);
+            this.txtProjectFile.ReadOnly = true;
+            this.txtProjectFile.Size = new System.Drawing.Size(371, 21);
             this.txtProjectFile.TabIndex = 1;
             // 
             // label2
@@ -66,12 +67,13 @@
             this.txtSnapshotFolders.Location = new System.Drawing.Point(12, 73);
             this.txtSnapshotFolders.Multiline = true;
             this.txtSnapshotFolders.Name = "txtSnapshotFolders";
-            this.txtSnapshotFolders.Size = new System.Drawing.Size(352, 80);
+            this.txtSnapshotFolders.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtSnapshotFolders.Size = new System.Drawing.Size(371, 130);
             this.txtSnapshotFolders.TabIndex = 3;
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(289, 169);
+            this.btnClose.Location = new System.Drawing.Point(308, 218);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 4;
@@ -80,7 +82,7 @@
             // 
             // btnCreate
             // 
-            this.btnCreate.Location = new System.Drawing.Point(208, 169);
+            this.btnCreate.Location = new System.Drawing.Point(227, 218);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(75, 23);
             this.btnCreate.TabIndex = 5;
@@ -91,7 +93,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(376, 204);
+            this.ClientSize = new System.Drawing.Size(395, 253);
             this.Controls.Add(this.btnCreate);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.txtSnapshotFolders);

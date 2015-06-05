@@ -28,42 +28,29 @@ namespace Onway.AutoProjectFiles
         private void BtnCreate_Click(object sender, EventArgs e)
         {
             DialogResult = System.Windows.Forms.DialogResult.None;
-            if (string.IsNullOrEmpty(txtProjectFile.Text)
-                || !File.Exists(txtProjectFile.Text))
+            try
             {
-                MessageBox.Show("Project file not found!", this.Text, 
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+                LogService.Instance.Open();
+                LogService.Instance.LogMsg(">> Creating Project Snapshot...");
 
-            if (string.IsNullOrEmpty(txtSnapshotFolders.Text))
-            {
-                MessageBox.Show("Snapshot folders not specified!", this.Text, 
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            string[] folders = txtSnapshotFolders.Text.Split(
-                new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (string f in folders)
-            {
-                if (!Directory.Exists(Path.Combine(Path.GetDirectoryName(txtProjectFile.Text), f)))
+                string[] folders = null;
+                if (!IsValidInput(out folders))
                 {
-                    MessageBox.Show("Snapshot folder not exist :" + Environment.NewLine + Path.Combine(Path.GetDirectoryName(txtProjectFile.Text), f),
-                        this.Text,
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-            }
-            if (folders.Length == 0)
-            {
-                MessageBox.Show("Snapshot folders not specified!", this.Text,
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
 
-            CreateSnapshot(txtProjectFile.Text, folders);
-            DialogResult = System.Windows.Forms.DialogResult.OK;
+                LogService.Instance.LogMsg(">> Snapshot {0} entries done!", CreateSnapshot(txtProjectFile.Text, folders));
+                DialogResult = System.Windows.Forms.DialogResult.OK;
+                btnClose.PerformClick();
+            }
+            catch (Exception ex)
+            {
+                LogService.Instance.LogMsg("Error>> " + ex.Message + Environment.NewLine + ex.StackTrace);
+            }
+            finally
+            {
+                LogService.Instance.Close();
+            }
         }
 
         private void Init(string projFullPath)
@@ -76,7 +63,38 @@ namespace Onway.AutoProjectFiles
             }
         }
 
-        private void CreateSnapshot(string projFullPath, string[] folders)
+        private bool IsValidInput(out string[] folders)
+        {
+            folders = null;
+
+            if (string.IsNullOrEmpty(txtSnapshotFolders.Text))
+            {
+                LogService.Instance.LogMsg("Error>> Snapshot folders not specified!");
+                return false;
+            }
+
+            folders = txtSnapshotFolders.Text.Split(
+                new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (string f in folders)
+            {
+                if (!Directory.Exists(Path.Combine(Path.GetDirectoryName(txtProjectFile.Text), f)))
+                {
+                    LogService.Instance.LogMsg("Error>> Snapshot folder not exist: " + Environment.NewLine 
+                        + Path.Combine(Path.GetDirectoryName(txtProjectFile.Text), f));
+                    return false;
+                }
+            }
+
+            if (folders.Length == 0)
+            {
+                LogService.Instance.LogMsg("Error>> Snapshot folders not specified!");
+                return false;
+            }
+
+            return true;
+        }
+
+        private int CreateSnapshot(string projFullPath, string[] folders)
         {
             ProjectSnapshot ps = SnapshotManager.Instance.NewSnapshot(projFullPath);
             ps.Folders.Clear();
@@ -91,7 +109,9 @@ namespace Onway.AutoProjectFiles
                 Path.GetDirectoryName(ps.ProjectFile), ps.Folders);
             curEntries.ForEach(i => hSet.Add(i));
 
-            ps.Save();
+            int retCnt = ps.Entries.Count;
+            ps.Save(); // it will reset ps.Entries to null; evil...
+            return retCnt;
         }
     }
 }

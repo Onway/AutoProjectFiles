@@ -66,6 +66,7 @@ namespace Onway.AutoProjectFiles
         public void Open()
         {
             outputPane = VsUtil.GetVsOutputWindowPane();
+            outputPane.Clear();
         }
 
         public void Close()

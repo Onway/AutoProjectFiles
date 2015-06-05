@@ -55,12 +55,12 @@ namespace Onway.AutoProjectFiles
             List<string> delSuccList = new List<string>();
             try
             {
-                LogService.Instance.LogMsg(">> Exclude {0} entries from project...", delFiles.Count);
+                LogService.Instance.LogMsg(">> Excluding {0} entries from project...", delFiles.Count);
                 ExcludeFiles(delFiles, ref delSuccList);
                 LogService.Instance.LogMsgs(delSuccList);
                 LogService.Instance.LogMsg(">> {0} entries done!", delSuccList.Count);
 
-                LogService.Instance.LogMsg(">> Include {0} entries to project...", newFiles.Count);
+                LogService.Instance.LogMsg(">> Including {0} entries to project...", newFiles.Count);
                 IncludeFiles(newFiles, ref addSuccList);
                 LogService.Instance.LogMsgs(addSuccList);
                 LogService.Instance.LogMsg(">> {0} entries done!", addSuccList.Count);
