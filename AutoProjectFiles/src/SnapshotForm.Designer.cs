@@ -28,17 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.txtProjectFile = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtSnapshotFolders = new System.Windows.Forms.TextBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnCreate = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.labelHelp = new System.Windows.Forms.Label();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(83, 12);
@@ -56,15 +61,16 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 58);
+            this.label2.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(12, 60);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(107, 12);
+            this.label2.Size = new System.Drawing.Size(113, 12);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Snapshot Folders:";
+            this.label2.Text = "Snapshot Folders: ";
             // 
             // txtSnapshotFolders
             // 
-            this.txtSnapshotFolders.Location = new System.Drawing.Point(12, 73);
+            this.txtSnapshotFolders.Location = new System.Drawing.Point(12, 77);
             this.txtSnapshotFolders.Multiline = true;
             this.txtSnapshotFolders.Name = "txtSnapshotFolders";
             this.txtSnapshotFolders.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -73,7 +79,7 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(308, 218);
+            this.btnClose.Location = new System.Drawing.Point(308, 216);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 4;
@@ -82,18 +88,39 @@
             // 
             // btnCreate
             // 
-            this.btnCreate.Location = new System.Drawing.Point(227, 218);
+            this.btnCreate.Location = new System.Drawing.Point(227, 216);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(75, 23);
             this.btnCreate.TabIndex = 5;
             this.btnCreate.Text = "Create";
             this.btnCreate.UseVisualStyleBackColor = true;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 77);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(0, 12);
+            this.label3.TabIndex = 6;
+            // 
+            // labelHelp
+            // 
+            this.labelHelp.AutoSize = true;
+            this.labelHelp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelHelp.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelHelp.Location = new System.Drawing.Point(119, 59);
+            this.labelHelp.Name = "labelHelp";
+            this.labelHelp.Size = new System.Drawing.Size(14, 14);
+            this.labelHelp.TabIndex = 7;
+            this.labelHelp.Text = "?";
+            // 
             // SnapshotForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(395, 253);
+            this.ClientSize = new System.Drawing.Size(398, 250);
+            this.Controls.Add(this.labelHelp);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.btnCreate);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.txtSnapshotFolders);
@@ -120,5 +147,8 @@
         private System.Windows.Forms.TextBox txtSnapshotFolders;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnCreate;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelHelp;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }

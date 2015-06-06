@@ -17,6 +17,8 @@ namespace Onway.AutoProjectFiles
             InitializeComponent();
             btnClose.Click += BtnClose_Click;
             btnCreate.Click += BtnCreate_Click;
+            labelHelp.MouseLeave += LabelHelp_MouseLeave;
+            labelHelp.MouseHover += LabelHelp_MouseHover;
             Init(projFullPath);
         }
 
@@ -53,6 +55,16 @@ namespace Onway.AutoProjectFiles
             }
         }
 
+        private void LabelHelp_MouseHover(object sender, EventArgs e)
+        {
+            toolTip.Show(helpTip, labelHelp, labelHelp.Width, labelHelp.Height ,10000);
+        }
+
+        private void LabelHelp_MouseLeave(object sender, EventArgs e)
+        {
+            toolTip.Hide(labelHelp);
+        }
+
         private void Init(string projFullPath)
         {
             txtProjectFile.Text = projFullPath;
@@ -77,6 +89,11 @@ namespace Onway.AutoProjectFiles
                 new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
             foreach (string f in folders)
             {
+                if (f.IndexOf('.') != -1 || f.IndexOf("..") != -1)
+                {
+                    LogService.Instance.LogMsg("Error>> Directory notation '.' and '..' are not supported.");
+                    return false;
+                }
                 if (!Directory.Exists(Path.Combine(Path.GetDirectoryName(txtProjectFile.Text), f)))
                 {
                     LogService.Instance.LogMsg("Error>> Snapshot folder not exist: " + Environment.NewLine 
@@ -113,5 +130,11 @@ namespace Onway.AutoProjectFiles
             ps.Save(); // it will reset ps.Entries to null; evil...
             return retCnt;
         }
+
+        private string helpTip = 
+@"Relative paths to project file's directory.
+Write a path in each line.
+Directory separator '\' and '/' are acceptable.
+But not support directory notation '.' and '..'.";
     }
 }
