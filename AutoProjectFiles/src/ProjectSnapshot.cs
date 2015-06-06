@@ -106,6 +106,12 @@ namespace Onway.AutoProjectFiles
             set;
         }
 
+        public string LastUpdate
+        {
+            get;
+            set;
+        }
+
         public List<string> Extensions
         {
             get;
@@ -136,6 +142,7 @@ namespace Onway.AutoProjectFiles
             XElement rootNode = xDoc.Element("Snapshot");
 
             this.ProjectFile = rootNode.Element("ProjectFile").Value;
+            this.LastUpdate = rootNode.Element("LastUpdate").Value;
 
             foreach (XElement item in rootNode.Element("Extensions").Elements("Item"))
             {
@@ -161,6 +168,10 @@ namespace Onway.AutoProjectFiles
 
             XElement projectFileNode = new XElement("ProjectFile", this.ProjectFile);
             rootNode.Add(projectFileNode);
+
+            this.LastUpdate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            XElement lastUpdateNode = new XElement("LastUpdate", this.LastUpdate);
+            rootNode.Add(lastUpdateNode);
 
             XElement extensionsNode = new XElement("Extensions");
             rootNode.Add(extensionsNode);

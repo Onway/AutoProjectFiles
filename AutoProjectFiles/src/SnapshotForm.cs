@@ -72,6 +72,7 @@ namespace Onway.AutoProjectFiles
             if (ps != null)
             {
                 txtSnapshotFolders.Text = string.Join(Environment.NewLine, ps.Folders);
+                labelLastUpdate.Text = "Last Update: " + ps.LastUpdate;
             }
         }
 

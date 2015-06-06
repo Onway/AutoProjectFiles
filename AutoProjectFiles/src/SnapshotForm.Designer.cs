@@ -38,6 +38,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.labelHelp = new System.Windows.Forms.Label();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.labelLastUpdate = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -108,17 +109,27 @@
             this.labelHelp.AutoSize = true;
             this.labelHelp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.labelHelp.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelHelp.Location = new System.Drawing.Point(119, 59);
+            this.labelHelp.Location = new System.Drawing.Point(122, 59);
             this.labelHelp.Name = "labelHelp";
             this.labelHelp.Size = new System.Drawing.Size(14, 14);
             this.labelHelp.TabIndex = 7;
             this.labelHelp.Text = "?";
+            // 
+            // labelLastUpdate
+            // 
+            this.labelLastUpdate.AutoSize = true;
+            this.labelLastUpdate.Location = new System.Drawing.Point(12, 221);
+            this.labelLastUpdate.Name = "labelLastUpdate";
+            this.labelLastUpdate.Size = new System.Drawing.Size(113, 12);
+            this.labelLastUpdate.TabIndex = 8;
+            this.labelLastUpdate.Text = "Last Update: Never";
             // 
             // SnapshotForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(398, 250);
+            this.Controls.Add(this.labelLastUpdate);
             this.Controls.Add(this.labelHelp);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnCreate);
@@ -150,5 +161,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label labelHelp;
         private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.Label labelLastUpdate;
     }
 }
