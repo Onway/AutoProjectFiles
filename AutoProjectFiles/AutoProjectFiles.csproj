@@ -125,16 +125,13 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Guids.cs" />
-    <Compile Include="Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="AutoProjectFilesPackage.cs" />
+    <Compile Include="Guids.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PkgCmdID.cs" />
+    <Compile Include="Resources.en-US.Designer.cs" />
+    <Compile Include="Resources.zh-CN.Designer.cs" />
     <Compile Include="src\IFileOperator.cs" />
     <Compile Include="src\Ilogger.cs" />
     <Compile Include="src\ProjectOperator.cs" />
@@ -148,18 +145,19 @@
     <Compile Include="src\VsUtil.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
+    <EmbeddedResource Include="Resources.en-US.resx">
+      <MergeWithCTO>true</MergeWithCTO>
+      <LogicalName>VSPackage.en-US.Resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources.zh-CN.resx">
+      <MergeWithCTO>true</MergeWithCTO>
+      <LogicalName>VSPackage.zh-CN.Resources</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="src\SnapshotForm.resx">
       <DependentUpon>SnapshotForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="VSPackage.resx">
-      <MergeWithCTO>true</MergeWithCTO>
-      <ManifestResourceName>VSPackage</ManifestResourceName>
-    </EmbeddedResource>
+    <EmbeddedResource Include="VSPackage.en-US.resx" />
+    <EmbeddedResource Include="VSPackage.zh-CN.resx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="source.extension.vsixmanifest">
@@ -170,15 +168,19 @@
     <None Include="Key.snk" />
   </ItemGroup>
   <ItemGroup>
-    <VSCTCompile Include="AutoProjectFiles.vsct">
-      <ResourceName>Menus.ctmenu</ResourceName>
-    </VSCTCompile>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\Images.png" />
   </ItemGroup>
   <ItemGroup>
+    <VSCTCompile Include="AutoProjectFiles.en-US.vsct">
+      <ResourceName>Menus.ctmenu</ResourceName>
+    </VSCTCompile>
+    <VSCTCompile Include="AutoProjectFiles.zh-CN.vsct">
+      <ResourceName>Menus.ctmenu</ResourceName>
+    </VSCTCompile>
     <Content Include="Resources\Package.ico" />
+    <Content Include="zh-CN\Extension.vsixlangpack">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <UseCodebase>true</UseCodebase>

@@ -17,7 +17,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCulture("")]   
 [assembly: ComVisible(false)]     
 [assembly: CLSCompliant(false)]
-[assembly: NeutralResourcesLanguage("en-US")]
+[assembly: NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.Satellite)]
 
 // Version information for an assembly consists of the following four values:
 //

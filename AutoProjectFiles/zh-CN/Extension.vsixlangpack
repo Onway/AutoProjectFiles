@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<VsixLanguagePack Version="1.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema-lp/2010">
+  <LocalizedName>项目文件自动更新</LocalizedName>
+  <LocalizedDescription>自动将文件包括到项目中或从项目中排除。</LocalizedDescription>
+  <License />
+  <MoreInfoUrl />
+</VsixLanguagePack>
