@@ -49,21 +49,25 @@ namespace Onway.AutoProjectFiles
         {
             List<string> newFiles = null;
             List<string> delFiles = null;
-            FileOperateService.Instance.GetOperableFiles(proj.FullName, out newFiles, out delFiles);
 
+            LogService.Instance.LogMsg(DateTime.Now.ToString("HH:mm:ss.fff"));
+            FileOperateService.Instance.GetOperableFiles(proj.FullName, out newFiles, out delFiles);
             List<string> addSuccList = new List<string>();
             List<string> delSuccList = new List<string>();
             try
             {
+                LogService.Instance.LogMsg(DateTime.Now.ToString("HH:mm:ss.fff"));
                 LogService.Instance.LogMsg(">> Excluding {0} entries from project...", delFiles.Count);
                 ExcludeFiles(delFiles, ref delSuccList);
                 LogService.Instance.LogMsgs(delSuccList);
                 LogService.Instance.LogMsg(">> {0} entries done!", delSuccList.Count);
 
+                LogService.Instance.LogMsg(DateTime.Now.ToString("HH:mm:ss.fff"));
                 LogService.Instance.LogMsg(">> Including {0} entries to project...", newFiles.Count);
                 IncludeFiles(newFiles, ref addSuccList);
                 LogService.Instance.LogMsgs(addSuccList);
                 LogService.Instance.LogMsg(">> {0} entries done!", addSuccList.Count);
+                LogService.Instance.LogMsg(DateTime.Now.ToString("HH:mm:ss.fff"));
             }
             finally
             {
