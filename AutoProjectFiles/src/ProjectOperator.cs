@@ -63,7 +63,7 @@ namespace Onway.AutoProjectFiles
                 LogService.Instance.LogMsgs(delSuccList);
 
                 msg = string.Format(MyResources.EntriesDoneFmt, delSuccList.Count);
-                LogService.Instance.LogMsg(">> {0}!", msg);
+                LogService.Instance.LogMsg(">> {0}", msg);
 
                 // include
                 msg = string.Format(MyResources.IncludingTipFmt, newFiles.Count);
@@ -73,7 +73,7 @@ namespace Onway.AutoProjectFiles
                 LogService.Instance.LogMsgs(addSuccList);
 
                 msg = string.Format(MyResources.EntriesDoneFmt, addSuccList.Count);
-                LogService.Instance.LogMsg(">> {0}!", msg);
+                LogService.Instance.LogMsg(">> {0}", msg);
             }
             finally
             {

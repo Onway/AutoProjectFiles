@@ -132,7 +132,8 @@
     <Compile Include="PkgCmdID.cs" />
     <Compile Include="src\IFileOperator.cs" />
     <Compile Include="src\Ilogger.cs" />
-    <Compile Include="src\MyResources.cs" />
+    <Compile Include="src\MyResources\MyResources.cs" />
+    <Compile Include="src\MyResources\SnapshotFormResources.cs" />
     <Compile Include="src\ProjectOperator.cs" />
     <Compile Include="src\ProjectSnapshot.cs" />
     <Compile Include="src\SnapshotForm.cs">
@@ -152,7 +153,13 @@
       <MergeWithCTO>true</MergeWithCTO>
       <LogicalName>VSPackage.zh-CN.Resources</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="src\SnapshotForm.en-US.resx">
+      <DependentUpon>SnapshotForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="src\SnapshotForm.resx">
+      <DependentUpon>SnapshotForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\SnapshotForm.zh-CN.resx">
       <DependentUpon>SnapshotForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VSPackage.en-US.resx" />

@@ -33,7 +33,7 @@ namespace Onway.AutoProjectFiles
             try
             {
                 LogService.Instance.Open();
-                LogService.Instance.LogMsg(">> Creating Project Snapshot...");
+                LogService.Instance.LogMsg(">> {0}...", MyResources.StartSnapshotTitle);
 
                 string[] folders = null;
                 if (!IsValidInput(out folders))
@@ -41,13 +41,14 @@ namespace Onway.AutoProjectFiles
                     return;
                 }
 
-                LogService.Instance.LogMsg(">> Snapshot {0} entries done!", CreateSnapshot(txtProjectFile.Text, folders));
+                string msg = string.Format(MyResources.SnapshotDoneFmt, CreateSnapshot(txtProjectFile.Text, folders));
+                LogService.Instance.LogMsg(">> {0}", msg);
                 DialogResult = System.Windows.Forms.DialogResult.OK;
                 btnClose.PerformClick();
             }
             catch (Exception ex)
             {
-                LogService.Instance.LogMsg("Error>> " + ex.Message + Environment.NewLine + ex.StackTrace);
+                LogService.Instance.LogMsg("{0}>> {1}", MyResources.Error, ex.Message + Environment.NewLine + ex.StackTrace);
             }
             finally
             {
@@ -72,7 +73,7 @@ namespace Onway.AutoProjectFiles
             if (ps != null)
             {
                 txtSnapshotFolders.Text = string.Join(Environment.NewLine, ps.Folders);
-                labelLastUpdate.Text = "Last Update: " + ps.LastUpdate;
+                labelLastUpdate.Text = string.Format("{0}{1}", MyResources.LastUpdate, ps.LastUpdate);
             }
         }
 
@@ -82,7 +83,7 @@ namespace Onway.AutoProjectFiles
 
             if (string.IsNullOrEmpty(txtSnapshotFolders.Text))
             {
-                LogService.Instance.LogMsg("Error>> Snapshot folders not specified!");
+                LogService.Instance.LogMsg("{0}>> {1}", MyResources.Error, MyResources.NotSpecifyFolder);
                 return false;
             }
 
@@ -92,20 +93,20 @@ namespace Onway.AutoProjectFiles
             {
                 if (f.IndexOf('.') != -1 || f.IndexOf("..") != -1)
                 {
-                    LogService.Instance.LogMsg("Error>> Directory notation '.' and '..' are not supported.");
+                    LogService.Instance.LogMsg("{0}>> {1}", MyResources.Error, MyResources.NotSupportNotation);
                     return false;
                 }
                 if (!Directory.Exists(Path.Combine(Path.GetDirectoryName(txtProjectFile.Text), f)))
                 {
-                    LogService.Instance.LogMsg("Error>> Snapshot folder not exist: " + Environment.NewLine 
-                        + Path.Combine(Path.GetDirectoryName(txtProjectFile.Text), f));
+                    LogService.Instance.LogMsg("{0}>> {1}{2}", MyResources.Error, MyResources.NotExistFolder, 
+                        Environment.NewLine + Path.Combine(Path.GetDirectoryName(txtProjectFile.Text), f));
                     return false;
                 }
             }
 
             if (folders.Length == 0)
             {
-                LogService.Instance.LogMsg("Error>> Snapshot folders not specified!");
+                LogService.Instance.LogMsg("{0}>> {1}", MyResources.Error, MyResources.NotSpecifyFolder);
                 return false;
             }
 
@@ -132,10 +133,6 @@ namespace Onway.AutoProjectFiles
             return retCnt;
         }
 
-        private string helpTip = 
-@"Relative paths to project file's directory.
-Write a path in each line.
-Directory separator '\' and '/' are acceptable.
-But not support directory notation '.' and '..'.";
+        private string helpTip = MyResources.HelpTip;
     }
 }

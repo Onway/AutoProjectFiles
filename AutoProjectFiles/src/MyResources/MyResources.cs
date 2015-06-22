@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Onway.AutoProjectFiles
 {
-    public class MyResources
+    public partial class MyResources
     {
         public static string PackageTitle
         {
@@ -38,6 +38,11 @@ namespace Onway.AutoProjectFiles
             get { return myRes.NoSnapshot; }
         }
 
+        public static string HelpTip
+        {
+            get { return myRes.HelpTip; }
+        }
+
         static MyResources()
         {
             myRes = System.Threading.Thread.CurrentThread.CurrentUICulture.Name == "zh-CN" ?
@@ -47,7 +52,7 @@ namespace Onway.AutoProjectFiles
         private static MyResources_en_US myRes;
     }
 
-    public class MyResources_en_US
+    public partial class MyResources_en_US
     {
         public virtual string PackageTitle
         {
@@ -71,16 +76,28 @@ namespace Onway.AutoProjectFiles
 
         public virtual string EntriesDoneFmt
         {
-            get { return "{0} entries done"; }
+            get { return "{0} entries done!"; }
         }
 
         public virtual string NoSnapshot
         {
             get { return "There is no snapshot for this project"; }
         }
+
+        public virtual string HelpTip
+        {
+            get
+            {
+                return
+@"Relative paths to project file's directory.
+Write a path in each line.
+Directory separator '\' and '/' are acceptable.
+But not support directory notation '.' and '..'.";
+            }
+        }
     }
 
-    public class MyResources_zh_CN : MyResources_en_US
+    public partial class MyResources_zh_CN : MyResources_en_US
     {
         public override string PackageTitle
         {
@@ -104,12 +121,23 @@ namespace Onway.AutoProjectFiles
 
         public override string EntriesDoneFmt
         {
-            get { return "完成{0}个条目"; }
+            get { return "完成{0}个条目！"; }
         }
 
         public override string NoSnapshot
         {
             get { return "当前项目未建立快照"; }
+        }
+
+        public override string HelpTip
+        {
+            get
+            {
+                return
+@"项目文件所在目录的相对路径，每行填写一个。
+使用目录分隔符'\'或者'/'。
+不支持目录符号'.'或者'..'。";
+            }
         }
     }
 }

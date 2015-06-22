@@ -173,9 +173,6 @@
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>0, 12</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>SnapshotForm</value>
-  </data>
   <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
     <value>SimSun, 9pt</value>
   </data>
@@ -185,8 +182,8 @@
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>
   </data>
-  <data name="&gt;&gt;labelLastUpdate.Name" xml:space="preserve">
-    <value>labelLastUpdate</value>
+  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="labelHelp.Text" xml:space="preserve">
     <value>?</value>
@@ -204,8 +201,8 @@
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="txtSnapshotFolders.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
-    <value>Both</value>
+  <data name="txtProjectFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>371, 21</value>
   </data>
   <data name="&gt;&gt;btnClose.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -276,8 +273,11 @@
   <data name="labelHelp.Size" type="System.Drawing.Size, System.Drawing">
     <value>14, 14</value>
   </data>
-  <data name="txtProjectFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>371, 21</value>
+  <data name="&gt;&gt;labelLastUpdate.Name" xml:space="preserve">
+    <value>labelLastUpdate</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>SnapshotForm</value>
   </data>
   <data name="&gt;&gt;txtProjectFile.ZOrder" xml:space="preserve">
     <value>7</value>
@@ -300,14 +300,14 @@
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="label2.Font" type="System.Drawing.Font, System.Drawing">
     <value>SimSun, 9pt</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="txtSnapshotFolders.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Both</value>
   </data>
   <data name="&gt;&gt;btnCreate.Parent" xml:space="preserve">
     <value>$this</value>
@@ -411,9 +411,6 @@
   <data name="label1.Text" xml:space="preserve">
     <value>Project File:</value>
   </data>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>zh-CN</value>
-  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>

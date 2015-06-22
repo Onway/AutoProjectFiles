@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SnapshotForm));
             this.label1 = new System.Windows.Forms.Label();
             this.txtProjectFile = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -43,92 +44,66 @@
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(83, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Project File:";
+            this.toolTip.SetToolTip(this.label1, resources.GetString("label1.ToolTip"));
             // 
             // txtProjectFile
             // 
-            this.txtProjectFile.Location = new System.Drawing.Point(12, 24);
+            resources.ApplyResources(this.txtProjectFile, "txtProjectFile");
             this.txtProjectFile.Name = "txtProjectFile";
             this.txtProjectFile.ReadOnly = true;
-            this.txtProjectFile.Size = new System.Drawing.Size(371, 21);
-            this.txtProjectFile.TabIndex = 1;
+            this.toolTip.SetToolTip(this.txtProjectFile, resources.GetString("txtProjectFile.ToolTip"));
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(12, 60);
+            resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(113, 12);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Snapshot Folders: ";
+            this.toolTip.SetToolTip(this.label2, resources.GetString("label2.ToolTip"));
             // 
             // txtSnapshotFolders
             // 
-            this.txtSnapshotFolders.Location = new System.Drawing.Point(12, 77);
-            this.txtSnapshotFolders.Multiline = true;
+            resources.ApplyResources(this.txtSnapshotFolders, "txtSnapshotFolders");
             this.txtSnapshotFolders.Name = "txtSnapshotFolders";
-            this.txtSnapshotFolders.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtSnapshotFolders.Size = new System.Drawing.Size(371, 130);
-            this.txtSnapshotFolders.TabIndex = 3;
+            this.toolTip.SetToolTip(this.txtSnapshotFolders, resources.GetString("txtSnapshotFolders.ToolTip"));
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(308, 216);
+            resources.ApplyResources(this.btnClose, "btnClose");
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(75, 23);
-            this.btnClose.TabIndex = 4;
-            this.btnClose.Text = "Close";
+            this.toolTip.SetToolTip(this.btnClose, resources.GetString("btnClose.ToolTip"));
             this.btnClose.UseVisualStyleBackColor = true;
             // 
             // btnCreate
             // 
-            this.btnCreate.Location = new System.Drawing.Point(227, 216);
+            resources.ApplyResources(this.btnCreate, "btnCreate");
             this.btnCreate.Name = "btnCreate";
-            this.btnCreate.Size = new System.Drawing.Size(75, 23);
-            this.btnCreate.TabIndex = 5;
-            this.btnCreate.Text = "Create";
+            this.toolTip.SetToolTip(this.btnCreate, resources.GetString("btnCreate.ToolTip"));
             this.btnCreate.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 77);
+            resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(0, 12);
-            this.label3.TabIndex = 6;
+            this.toolTip.SetToolTip(this.label3, resources.GetString("label3.ToolTip"));
             // 
             // labelHelp
             // 
-            this.labelHelp.AutoSize = true;
+            resources.ApplyResources(this.labelHelp, "labelHelp");
             this.labelHelp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labelHelp.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelHelp.Location = new System.Drawing.Point(122, 59);
             this.labelHelp.Name = "labelHelp";
-            this.labelHelp.Size = new System.Drawing.Size(14, 14);
-            this.labelHelp.TabIndex = 7;
-            this.labelHelp.Text = "?";
+            this.toolTip.SetToolTip(this.labelHelp, resources.GetString("labelHelp.ToolTip"));
             // 
             // labelLastUpdate
             // 
-            this.labelLastUpdate.AutoSize = true;
-            this.labelLastUpdate.Location = new System.Drawing.Point(12, 221);
+            resources.ApplyResources(this.labelLastUpdate, "labelLastUpdate");
             this.labelLastUpdate.Name = "labelLastUpdate";
-            this.labelLastUpdate.Size = new System.Drawing.Size(113, 12);
-            this.labelLastUpdate.TabIndex = 8;
-            this.labelLastUpdate.Text = "Last Update: Never";
+            this.toolTip.SetToolTip(this.labelLastUpdate, resources.GetString("labelLastUpdate.ToolTip"));
             // 
             // SnapshotForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(398, 250);
             this.Controls.Add(this.labelLastUpdate);
             this.Controls.Add(this.labelHelp);
             this.Controls.Add(this.label3);
@@ -143,8 +118,7 @@
             this.MinimizeBox = false;
             this.Name = "SnapshotForm";
             this.ShowIcon = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Create Project Snapshot";
+            this.toolTip.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.ResumeLayout(false);
             this.PerformLayout();
 
