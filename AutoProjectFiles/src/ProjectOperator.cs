@@ -18,7 +18,7 @@ namespace Onway.AutoProjectFiles
             try
             {
                 LogService.Instance.Open();
-                LogService.Instance.LogMsg(">> Auto Project Files...");
+                LogService.Instance.LogMsg(">> {0}...", MyResources.PackageTitle);
 
                 if (IsOperableProject())
                 {
@@ -27,7 +27,7 @@ namespace Onway.AutoProjectFiles
             }
             catch (Exception ex)
             {
-                LogService.Instance.LogMsg("Error>> " + ex.Message + Environment.NewLine + ex.StackTrace);
+                LogService.Instance.LogMsg("{0}>> {1}", MyResources.Error, ex.Message + Environment.NewLine + ex.StackTrace);
             }
             finally
             {
@@ -40,7 +40,7 @@ namespace Onway.AutoProjectFiles
             string msg = FileOperateService.Instance.IsOperable(proj.FullName);
             if (msg != null)
             {
-                LogService.Instance.LogMsg("Error>> " + msg);
+                LogService.Instance.LogMsg("{0}>> {1}", MyResources.Error, msg);
             }
             return msg == null;
         }
@@ -50,24 +50,30 @@ namespace Onway.AutoProjectFiles
             List<string> newFiles = null;
             List<string> delFiles = null;
 
-            LogService.Instance.LogMsg(DateTime.Now.ToString("HH:mm:ss.fff"));
             FileOperateService.Instance.GetOperableFiles(proj.FullName, out newFiles, out delFiles);
             List<string> addSuccList = new List<string>();
             List<string> delSuccList = new List<string>();
             try
             {
-                LogService.Instance.LogMsg(DateTime.Now.ToString("HH:mm:ss.fff"));
-                LogService.Instance.LogMsg(">> Excluding {0} entries from project...", delFiles.Count);
+                // exclude
+                string msg = string.Format(MyResources.ExcludingTipFmt, delFiles.Count);
+                LogService.Instance.LogMsg(">> {0}...", msg);
+
                 ExcludeFiles(delFiles, ref delSuccList);
                 LogService.Instance.LogMsgs(delSuccList);
-                LogService.Instance.LogMsg(">> {0} entries done!", delSuccList.Count);
 
-                LogService.Instance.LogMsg(DateTime.Now.ToString("HH:mm:ss.fff"));
-                LogService.Instance.LogMsg(">> Including {0} entries to project...", newFiles.Count);
+                msg = string.Format(MyResources.EntriesDoneFmt, delSuccList.Count);
+                LogService.Instance.LogMsg(">> {0}!", msg);
+
+                // include
+                msg = string.Format(MyResources.IncludingTipFmt, newFiles.Count);
+                LogService.Instance.LogMsg(">> {0}...", msg);
+
                 IncludeFiles(newFiles, ref addSuccList);
                 LogService.Instance.LogMsgs(addSuccList);
-                LogService.Instance.LogMsg(">> {0} entries done!", addSuccList.Count);
-                LogService.Instance.LogMsg(DateTime.Now.ToString("HH:mm:ss.fff"));
+
+                msg = string.Format(MyResources.EntriesDoneFmt, addSuccList.Count);
+                LogService.Instance.LogMsg(">> {0}!", msg);
             }
             finally
             {

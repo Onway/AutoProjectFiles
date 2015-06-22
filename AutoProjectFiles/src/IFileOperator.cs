@@ -44,61 +44,11 @@ namespace Onway.AutoProjectFiles
 
         private FileOperateService()
         {
-            //oper = new FileOperateTest();
             oper = new SnapshotOperator();
         }
 
         private IFileOperator oper;
 
         private static FileOperateService instance;
-    }
-
-    public class FileOperateTest : IFileOperator
-    {
-        public FileOperateTest()
-        {
-            projFile = @"E:\Codes\VisualStudio\Projects\Hamt\Hamt\Hamt.csproj";
-            watchFile = Path.Combine(Path.GetDirectoryName(projFile), "WatchFile.txt");
-        }
-
-        public string IsOperable(string projFullPath)
-        {
-            if (projFullPath != projFile)
-            {
-                return "不支持的项目";
-            }
-            return null;
-        }
-
-        public void GetOperableFiles(string projFullPath, out List<string> newFiles, out List<string> delFiles)
-        {
-            newFiles = new List<string>();
-            delFiles = new List<string>();
-
-            if (!File.Exists(watchFile))
-            {
-                return;
-            }
-            foreach (string line in File.ReadAllLines(watchFile))
-            {
-                string[] parts = line.Split(',');
-                if (parts[0] == "A")
-                {
-                    newFiles.Add(parts[1]);
-                }
-                else
-                {
-                    delFiles.Add(parts[1]);
-                }
-            }
-        }
-
-        public void SaveOperableFiles(string projFullPath, List<string> newFiles, List<string> delFiles)
-        {
-        }
-
-        private string projFile;
-
-        private string watchFile;
     }
 }

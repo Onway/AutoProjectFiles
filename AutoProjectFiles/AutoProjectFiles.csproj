@@ -132,6 +132,7 @@
     <Compile Include="PkgCmdID.cs" />
     <Compile Include="src\IFileOperator.cs" />
     <Compile Include="src\Ilogger.cs" />
+    <Compile Include="src\MyResources.cs" />
     <Compile Include="src\ProjectOperator.cs" />
     <Compile Include="src\ProjectSnapshot.cs" />
     <Compile Include="src\SnapshotForm.cs">
