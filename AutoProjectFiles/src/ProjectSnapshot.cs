@@ -226,7 +226,7 @@ namespace Onway.AutoProjectFiles
             {
                 return null;
             }
-            return "There is no snapshot for this project:" + Environment.NewLine + projFullPath;
+            return "There is no snapshot for this project: " + Environment.NewLine + projFullPath;
         }
 
         public void GetOperableFiles(string projFullPath, out List<string> newFiles, out List<string> delFiles)

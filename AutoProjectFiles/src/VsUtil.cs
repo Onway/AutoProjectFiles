@@ -19,11 +19,6 @@ namespace Onway.AutoProjectFiles
 {
     public static class VsUtil
     {
-        public static string PackageTitle
-        {
-            get { return "Auto Project Files"; }
-        }
-
         public static IVsUIShell VsUIShell
         {
             get;
@@ -31,36 +26,11 @@ namespace Onway.AutoProjectFiles
         }
 
         /// <summary>
-        /// Creates a relative path from one file or folder to another.
-        /// http://stackoverflow.com/questions/275689/how-to-get-relative-path-from-absolute-path
+        /// 获取相对路径的所有文件
         /// </summary>
-        /// <param name="fromPath">Contains the directory that defines the start of the relative path.</param>
-        /// <param name="toPath">Contains the path that defines the endpoint of the relative path.</param>
-        /// <returns>The relative path from the start directory to the end path.</returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="UriFormatException"></exception>
-        /// <exception cref="InvalidOperationException"></exception>
-        public static String MakeRelativePath(String fromPath, String toPath)
-        {
-            if (String.IsNullOrEmpty(fromPath)) throw new ArgumentNullException("fromPath");
-            if (String.IsNullOrEmpty(toPath)) throw new ArgumentNullException("toPath");
-
-            Uri fromUri = new Uri(fromPath);
-            Uri toUri = new Uri(toPath);
-
-            if (fromUri.Scheme != toUri.Scheme) { return toPath; } // path can't be made relative.
-
-            Uri relativeUri = fromUri.MakeRelativeUri(toUri);
-            String relativePath = Uri.UnescapeDataString(relativeUri.ToString());
-
-            if (toUri.Scheme.ToUpperInvariant() == "FILE")
-            {
-                relativePath = relativePath.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar);
-            }
-
-            return relativePath;
-        }
-
+        /// <param name="rootDir"></param>
+        /// <param name="relativeFolders"></param>
+        /// <returns>相对路径内的所有文件</returns>
         public static List<string> DirectoryTraversal(string rootDir, List<string> relativeFolders)
         {
             List<string> retList = new List<string>();
@@ -114,33 +84,6 @@ namespace Onway.AutoProjectFiles
             return (Project)projects.GetValue(0);
         }
 
-        public static DTE2 GetCurrentDTE2()
-        {
-            //rot entry for visual studio running under current process.
-            string rotEntry = String.Format("!VisualStudio.DTE.12.0:{0}", System.Diagnostics.Process.GetCurrentProcess().Id);
-            IRunningObjectTable rot;
-            GetRunningObjectTable(0, out rot);
-            IEnumMoniker enumMoniker;
-            rot.EnumRunning(out enumMoniker);
-            enumMoniker.Reset();
-            IntPtr fetched = IntPtr.Zero;
-            IMoniker[] moniker = new IMoniker[1];
-            while (enumMoniker.Next(1, moniker, fetched) == 0)
-            {
-                IBindCtx bindCtx;
-                CreateBindCtx(0, out bindCtx);
-                string displayName;
-                moniker[0].GetDisplayName(bindCtx, null, out displayName);
-                if (displayName == rotEntry)
-                {
-                    object comObject;
-                    rot.GetObject(moniker[0], out comObject);
-                    return (EnvDTE80.DTE2)comObject;
-                }
-            }
-            return null;
-        }
-
         public static IVsOutputWindowPane GetVsOutputWindowPane()
         {
             IVsOutputWindow outputWindow =
@@ -156,6 +99,34 @@ namespace Onway.AutoProjectFiles
 
             pane.Activate();
             return pane;
+        }
+
+        private static DTE2 GetCurrentDTE2()
+        {
+            string prefix = "!VisualStudio.DTE.";
+            string suffix = ":" + System.Diagnostics.Process.GetCurrentProcess().Id;
+            // string rotEntry = String.Format("!VisualStudio.DTE.12.0:{0}", System.Diagnostics.Process.GetCurrentProcess().Id);
+            IRunningObjectTable rot;
+            GetRunningObjectTable(0, out rot);
+            IEnumMoniker enumMoniker;
+            rot.EnumRunning(out enumMoniker);
+            enumMoniker.Reset();
+            IntPtr fetched = IntPtr.Zero;
+            IMoniker[] moniker = new IMoniker[1];
+            while (enumMoniker.Next(1, moniker, fetched) == 0)
+            {
+                IBindCtx bindCtx;
+                CreateBindCtx(0, out bindCtx);
+                string displayName;
+                moniker[0].GetDisplayName(bindCtx, null, out displayName);
+                if (displayName.StartsWith(prefix) && displayName.EndsWith(suffix))
+                {
+                    object comObject;
+                    rot.GetObject(moniker[0], out comObject);
+                    return (EnvDTE80.DTE2)comObject;
+                }
+            }
+            return null;
         }
 
         [DllImport("ole32.dll")]
