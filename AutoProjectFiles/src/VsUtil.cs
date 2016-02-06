@@ -105,7 +105,6 @@ namespace Onway.AutoProjectFiles
         {
             string prefix = "!VisualStudio.DTE.";
             string suffix = ":" + System.Diagnostics.Process.GetCurrentProcess().Id;
-            // string rotEntry = String.Format("!VisualStudio.DTE.12.0:{0}", System.Diagnostics.Process.GetCurrentProcess().Id);
             IRunningObjectTable rot;
             GetRunningObjectTable(0, out rot);
             IEnumMoniker enumMoniker;
